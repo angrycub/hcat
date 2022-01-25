@@ -27,7 +27,7 @@ func parseFloat(s string) (float64, error) {
 		return 0.0, nil
 	}
 
-	result, err := strconv.ParseFloat(s, 10)
+	result, err := strconv.ParseFloat(s, 64)
 	if err != nil {
 		return 0, errors.Wrap(err, "parseFloat")
 	}

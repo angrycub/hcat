@@ -16,7 +16,7 @@ import (
 const dataBufferSize = 2048
 
 // standard error returned when you try to register the same notifier twice
-var RegistryErr = fmt.Errorf("duplicate watcher registry entry")
+var ErrRegistry = fmt.Errorf("duplicate watcher registry entry")
 
 // RetryFunc defines the function type used to determine how many and how often
 // to retry calls to the external services.
@@ -605,7 +605,7 @@ func (t *tracker) registerNotifiers(ns ...Notifier) error {
 	defer t.Unlock()
 	for _, n := range ns {
 		if _, ok := t.notifiers[n.ID()]; ok {
-			return RegistryErr
+			return ErrRegistry
 		}
 	}
 	for _, n := range ns {

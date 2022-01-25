@@ -1,6 +1,7 @@
 package hcat
 
 import (
+	"net"
 	"net/http"
 	"os"
 	"sync"
@@ -155,8 +156,7 @@ func (i TransportInput) toInternal(cci *idep.CreateClientInput) *idep.CreateClie
 	cci.SSLCACert = i.SSLCACert
 	cci.SSLCAPath = i.SSLCAPath
 	cci.ServerName = i.ServerName
-	cci.TransportDialKeepAlive = i.DialKeepAlive
-	cci.TransportDialTimeout = i.DialTimeout
+	cci.TransportCustomDialer = &net.Dialer{Timeout: i.DialTimeout, KeepAlive: i.DialKeepAlive}
 	cci.TransportDisableKeepAlives = i.DisableKeepAlives
 	cci.TransportIdleConnTimeout = i.IdleConnTimeout
 	cci.TransportMaxIdleConns = i.MaxIdleConns

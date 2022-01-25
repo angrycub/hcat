@@ -7,7 +7,7 @@ func TestDeny(t *testing.T) {
 	if v != "" {
 		t.Errorf("bad return string: '%v'", v)
 	}
-	if err != disabledErr {
+	if err != errDisabled {
 		t.Errorf("bad error: %v", err)
 	}
 }
